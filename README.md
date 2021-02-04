@@ -1,1 +1,1 @@
-A simple blog wesbite made using Ruby on Rails
+A simple blog website made using Ruby on Rails
