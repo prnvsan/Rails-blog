@@ -1,2 +1,16 @@
-<h1>Home<h1>
-<h1>Posts</h1>
+<h1>Welcome to the blog!</h1>
+<% if user_signed_in? %>
+            <li>
+                <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+            </li>
+            <h1>Click here to view posts!</h1>
+            <%= link_to 'Posts', posts_path, class: 'nav-link' %>
+<% else %>
+<li class="nav-item">
+    <%= link_to 'Sign In', new_user_session_path, class: 'nav-link' %>
+</li>
+<li class="nav-item">
+    <%= link_to 'Register', new_user_registration_path, class: 'nav-link' %>
+</li>
+
+<% end %>

@@ -1,12 +1,15 @@
 class PostsController < ApplicationController
+  load_and_authorize_resource
+  
   def new
     @post = Post.new
   end
 
   def create 
     @post = Post.new(post_params)
+    @post.user = current_user
     if @post.save
-      flash[:notice] = "Article was successfully created"
+      flash[:notice] = "Post was successfully created"
       redirect_to post_path(@post)
     else
     render 'new'
@@ -31,6 +34,13 @@ class PostsController < ApplicationController
       flash[:notice] = "Post was not updated"
       render 'edit'
     end
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    flash[:notice] = "Post was deleted"
+    redirect_to posts_path
   end
 
   def index

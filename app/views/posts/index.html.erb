@@ -1,3 +1,5 @@
+<% if user_signed_in? %>
+
 <h1>Listing all posts</h1>
 <p>
 <%= link_to "Create new post", new_post_path %>
@@ -6,13 +8,29 @@
   <tr>
     <th> Title </th>
     <th> Description </th>
+    <th> Username    </th>
   </tr>
   <% @posts.each do |post| %>
   <tr> 
     <td><%= post.title %></td>
-    <td><%= post.body %></td>
+    <td class="column"><%= post.body %></td>
+    <td class="column"><%= post.user.try(:username) %> </td>
     <td><%= link_to 'Edit', edit_post_path(post) %></td>
     <td><%= link_to 'Show', post_path(post) %></td>
+    <td><%= link_to 'Delete', post_path(post), method: :delete, data: {confirm: "Are you sure?"} %></td>
   </tr>
   <% end %>
 </table>
+<% else %>
+<h1> Please Sign In first, to view posts.</h1>
+<li>
+<%= link_to 'Sign In', new_user_session_path, class: 'nav-link' %>
+</li>
+<% end %>
+
+<br/>
+<% if user_signed_in? %>
+            <li>
+                <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+            </li>
+<% end %>
