@@ -26,7 +26,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise'
 
 #for authorisation
-gem 'cancan'
+gem 'cancancan'
 
 #to add roles
 gem 'rolify'
